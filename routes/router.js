@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controller/userController');
+const userController = require('../controllers/userController');
 
 router.get('/', (req, res, next) => {
     res.render('pages/index');
