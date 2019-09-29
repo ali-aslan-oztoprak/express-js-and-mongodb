@@ -1,0 +1,25 @@
+  {{> _errors}} 
+<div class="card">
+    <h5 class="card-header">Register</h5>
+    <div class="card-body">
+        <form action="/register" method="POST">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required value="{{username}}">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required value="{{password}}">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
