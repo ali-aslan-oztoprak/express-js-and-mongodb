@@ -1,6 +1,8 @@
 const  formValidation = require('../validation/formValidation');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const passport = require('passport');
+require('../authentication/passport/local');
  
 module.exports.getUserLogin = (req, res, next) => {
     res.render('pages/login');
@@ -11,7 +13,14 @@ module.exports.getUserRegister = (req, res, next) => {
 };
 
 module.exports.postUserLogin = (req, res, next) => {
-    res.send('Login Attempted');
+    // req.flash('error');
+    // req.flash('success');
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true,
+        successFlash: true,
+    })(req, res, next);
 };
 
 module.exports.postUserRegister = (req, res, next) => {
