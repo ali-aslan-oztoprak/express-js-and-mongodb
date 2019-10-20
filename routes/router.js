@@ -2,10 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
-router.get('/', (req, res, next) => {
-    res.render('pages/index');
-});
 
+router.get('/', userController.getUsers);
 router.get('/login', userController.getUserLogin);
 router.get('/logout', userController.getUserLogout);
 router.get('/register', userController.getUserRegister);

@@ -3,7 +3,14 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const passport = require('passport');
 require('../authentication/passport/local');
- 
+
+module.exports.getUsers = (req, res, next) => {
+    User.find({})
+        .then(users => {
+            res.render('pages/index', { users })
+        }).catch(err => console.log(err) );
+};
+
 module.exports.getUserLogin = (req, res, next) => {
     res.render('pages/login');
 };
