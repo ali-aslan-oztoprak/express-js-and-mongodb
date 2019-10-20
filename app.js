@@ -3,6 +3,9 @@ const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/router');
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 5000 || process.env.PORT;

@@ -61,7 +61,7 @@ module.exports.postUserRegister = (req, res, next) => {
         newUser
         .save()
         .then(() => {
-            console.log('Successful');
+            req.flash('successMessage', 'Successfully Registered');
             res.redirect('/');
         })
         .catch(err => console.log(err));
