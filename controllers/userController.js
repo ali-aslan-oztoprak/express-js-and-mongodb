@@ -1,4 +1,4 @@
-const  formValidation = require('../validation/formValidation');
+const formValidation = require('../validation/formValidation');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const passport = require('passport');
@@ -7,8 +7,8 @@ require('../authentication/passport/local');
 module.exports.getUsers = (req, res, next) => {
     User.find({})
         .then(users => {
-            res.render('pages/index', { users })
-        }).catch(err => console.log(err) );
+            res.render('pages/index', {users})
+        }).catch(err => console.log(err));
 };
 
 module.exports.getUserLogin = (req, res, next) => {
@@ -22,7 +22,7 @@ module.exports.getUserLogout = (req, res, next) => {
 };
 
 module.exports.getUserRegister = (req, res, next) => {
-    res.render('pages/register'); 
+    res.render('pages/register');
 };
 
 module.exports.postUserLogin = (req, res, next) => {
@@ -54,39 +54,39 @@ module.exports.postUserRegister = (req, res, next) => {
 
     // Check duplicate user
     User.findOne({username})
-    .then(user => {
-        if(user) {
-            errors.push({message: 'Username already exist'});
-            return res.render('pages/register', {
-                username,
-                password,
-                errors,
-            });
-        }
-    })
-    .catch (err => {
-        return console.log(err);
-    });
-
-    bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-        if (err) {
-            throw err;
-        }
-
-
-        const newUser = new User ({
-            username,
-            password: hash,
+        .then(user => {
+            if (user) {
+                errors.push({message: 'Username already exist'});
+                return res.render('pages/register', {
+                    username,
+                    password,
+                    errors,
+                });
+            }
+        })
+        .catch(err => {
+            return console.log(err);
         });
 
-        newUser
-        .save()
-        .then(() => {
-            req.flash('successMessage', 'Successfully Registered');
-            res.redirect('/');
-        })
-        .catch(err => console.log(err));
-    }); 
-});
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(password, salt, function (err, hash) {
+            if (err) {
+                throw err;
+            }
+
+
+            const newUser = new User({
+                username,
+                password: hash,
+            });
+
+            newUser
+                .save()
+                .then(() => {
+                    req.flash('successMessage', 'Successfully Registered');
+                    res.redirect('/');
+                })
+                .catch(err => console.log(err));
+        });
+    });
 };

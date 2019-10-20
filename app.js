@@ -1,5 +1,5 @@
 const express = require('express');
-const exphbs  = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/router');
 const bodyParser = require('body-parser');
@@ -15,10 +15,12 @@ const PORT = 5000 || process.env.PORT;
 app.use(cookieParser('passporttutorial'));
 app.use(
     session({
-    cookie: { maxAge: 60000 },
-    resave: true,
-    secret: "passporttutorial",
-    saveUninitialized: true,
+        cookie: {
+            maxAge: 60000,
+        },
+        resave: true,
+        secret: "passporttutorial",
+        saveUninitialized: true,
     })
 );
 app.use(flash());
@@ -36,10 +38,10 @@ app.use((req, res, next) => {
     // Passport Flash
     res.locals.passportFailure = req.flash('error');
     res.locals.passportSuccess = req.flash('success');
-    
+
     // Our Logged In User
     res.locals.user = req.user;
- 
+
     next();
 });
 // MongoDB Connection
@@ -62,6 +64,6 @@ app.set('view engine', 'handlebars');
 // Router Middleware
 app.use(userRouter);
 
-app.listen(PORT, () => { 
+app.listen(PORT, () => {
     console.log('App Started');
 });
