@@ -8,6 +8,12 @@ module.exports.getUserLogin = (req, res, next) => {
     res.render('pages/login');
 };
 
+module.exports.getUserLogout = (req, res, next) => {
+    req.logout();
+    req.flash('success', 'Successfully Logout');
+    res.redirect('/login');
+};
+
 module.exports.getUserRegister = (req, res, next) => {
     res.render('pages/register'); 
 };
